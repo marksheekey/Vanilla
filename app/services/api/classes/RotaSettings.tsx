@@ -1,0 +1,62 @@
+export interface RotaSettings {
+  id?: number;
+  attendance_pay_frequency?: string;
+  attendancePayFrequencyOptions?: PayFrequencyOptions;
+  attendanceRecordBreaks?: string;
+  availabilityEmployeesCanEdit?: boolean;
+  availabilityManagersCanEdit?: boolean;
+  breaksPaid?: boolean;
+  clockInWithoutShiftAllowed?: string;
+  currencySymbol?: string;
+  dashboardShowUnpublishedShifts?: boolean;
+  early_clock_in_minutes?: number;
+  employeeShiftNoteVisibility?: string;
+  employeesCanEditTimesheets?: boolean;
+  employeesCanOnlySeeSelf?: boolean;
+  employeesCanSeeAllLocations?: boolean;
+  employeesCanSeeEveryonesLeave?: boolean;
+  flagInOutDiscrepanciesMinutes?: number;
+  leaveProrateAllowances?: boolean;
+  leaveRequestsEnabled?: boolean;
+  leaveRequestsNoticeDays?: number;
+  leaveYearStartDay?: number;
+  leaveYearStartMonth?: number;
+  metadataEnabled?: boolean;
+  mobileClockingEnabled?: boolean;
+  openShiftClaimingEnabled?: boolean;
+  publicHolidayAffectsAllowance?: boolean;
+  remindersEnabled?: boolean;
+  rotaGrouping?: string;
+  rotaShowEmployeePhotos?: boolean;
+  roundBreaks?: number;
+  roundBreaksDirection?: string;
+  roundCurrency?: number;
+  roundCurrencyDirection?: string;
+  roundHours?: number;
+  roundHoursDirection?: string;
+  shiftAcknowledgementEnabled?: boolean;
+  shiftSwapsAcrossLocationsEnabled?: boolean;
+  shiftSwapsEnabled?: boolean;
+  shiftSwapsNoticeHours?: number;
+  shiftSwapsRequireApproval?: boolean;
+  shiftSwapsShiftRangeDays?: number;
+  showOpenShiftsFromOtherLocations?: boolean;
+  showShiftsFromOtherLocations?: boolean;
+  timeFormat?: string;
+  unavailabilityNoticeHours?: number;
+  unavailabilityRequestsEnabled?: boolean;
+  weekStarts?: string;
+  latenessAddedAfterMinutes?: number;
+  lateClockOutsPaidUntil?: string;
+  earlyClockInsPaidFrom?: string;
+  clockInOutRemindersMinutes?: number;
+  noShowNotificationsMinutes?: number;
+  isUsed?: boolean;
+}
+
+export interface PayFrequencyOptions {
+  startDate: string;
+  startDay: number;
+  startDay1: number;
+  startDay2: number;
+}
