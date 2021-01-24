@@ -4,9 +4,9 @@ import {Maybe} from '../../../types/interface';
 import {SettingsState} from '../types';
 
 const getValue: Selector<SettingsState, Maybe<RotaSettings>> = (
-  state: SettingsState
+  state: SettingsState,
 ) => state.settingsReducer.settings;
 
 export const SettingsSelector = {
-  getValue
+  getValue,
 };

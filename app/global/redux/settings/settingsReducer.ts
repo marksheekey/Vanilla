@@ -8,11 +8,13 @@ export interface SettingsState {
 }
 
 export const defaultState: SettingsState = {
-  settings: undefined
+  settings: undefined,
 };
 
-const settingsReducer = createReducer<DeepReadonly<SettingsState>,
-  SettingsActions>(defaultState).handleAction(onSettings.request, (state, action) => ({
-  settings: state.settings
+const settingsReducer = createReducer<
+  DeepReadonly<SettingsState>,
+  SettingsActions
+>(defaultState).handleAction(onSettings.request, (state) => ({
+  settings: state.settings,
 }));
 export default settingsReducer;

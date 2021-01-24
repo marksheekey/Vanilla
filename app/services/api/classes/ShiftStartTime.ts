@@ -3,4 +3,4 @@ export type ShiftStartTime = {
   start_time: number;
   end_time: number;
   location: number;
-}
+};
