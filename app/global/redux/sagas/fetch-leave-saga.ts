@@ -17,25 +17,7 @@ function* fetchLeaveForThisMonth() {
   try {
     let response: Maybe<Leave[]> = yield api.getLeave(start, end);
     if (response) {
-      console.log('leave:', 'update settings');
-      yield put(
-        onFetchLeaveThisMonth.success({ leave: response, startDate: start })
-      );
-    }
-
-  } catch (ex) {
-    const error = ex as AxiosError;
-    console.log('leave: error', error.message);
-    yield put(onFetchLeaveThisMonth.failure(ex));
-  }
-}
-
-function* getLeave(start: string) {
-  let end = clock.finalAPIDateOfMonth(start);
-  try {
-    let response: Maybe<Leave[]> = yield api.getLeave(start, end);
-    if (response) {
-      console.log('leave:', 'update settings');
+      console.log('leave: response', response);
       yield put(
         onFetchLeaveThisMonth.success({ leave: response, startDate: start })
       );
@@ -50,15 +32,15 @@ function* getLeave(start: string) {
 
 function* fetchNextMonth() {
   const current = yield select(LeaveSelector.getLeaveStartDate);
-  console.log("leave: current",current)
+  console.log("leave: current",current);
   const state = yield select(LeaveSelector.getLeave);
-  console.log('leave: state',state)
-  let start = clock.addMonthToAPIDate(current)
+  console.log('leave: state',state);
+  let start = clock.addMonthToAPIDate(current);
   let end = clock.finalAPIDateOfMonth(start);
   try {
     let response: Maybe<Leave[]> = yield api.getLeave(start, end);
     if (response) {
-      console.log('leave:', 'update settings');
+      console.log('leave: response', response);
       yield put(
         onNextMonth.success({ leave: response, startDate: start })
       );
@@ -75,12 +57,12 @@ function* fetchPreviousMonth() {
   const current = yield select(LeaveSelector.getLeaveStartDate);
   const state = yield select(LeaveSelector.getLeave);
   console.log('leave: state',state)
-  let start = clock.subMonthFromAPIDate(current)
+  let start = clock.subMonthFromAPIDate(current);
   let end = clock.finalAPIDateOfMonth(start);
   try {
     let response: Maybe<Leave[]> = yield api.getLeave(start, end);
     if (response) {
-      console.log('leave:', 'update settings');
+      console.log('leave: response', response);
       yield put(
         onPrevMonth.success({ leave: response, startDate: start })
       );
