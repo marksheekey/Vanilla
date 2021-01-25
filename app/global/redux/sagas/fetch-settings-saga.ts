@@ -1,21 +1,33 @@
-import {put, takeLatest} from 'redux-saga/effects';
+import {put, takeLatest, select} from 'redux-saga/effects';
 import {Maybe} from '../../../types/interface';
 import {RotaSettings} from '../../../services/api/classes/RotaSettings';
-import {onSettings, SettingsActions} from '../settings/settingsAction';
+import {onSettings} from '../settings/settingsAction';
 import SettingsAPI from '../../../services/api/settingsapi/SettingsAPI';
 import {AxiosError} from 'axios';
 import {Alert} from 'react-native';
+import JodaClockService from '../../../services/clock/JodaClockService';
+import {SettingsSelector} from '../settings/settingsSelector';
 
 const api = SettingsAPI.getInstance();
+const clock = JodaClockService.getInstance();
 
-function* fetchSettings(action: SettingsActions) {
+function* fetchSettings() {
   try {
-    let response: Maybe<RotaSettings> = yield api.getSettings();
-    console.log('settings api:', response);
-    if (response) {
-      yield put(onSettings.success(response));
+    let now = clock.now();
+    const existingExpiry: number = yield select(
+      SettingsSelector.getExpiryValue,
+    );
+    if (now > existingExpiry) {
+      console.log('settings:', 'fetch');
+      let response: Maybe<RotaSettings> = yield api.getSettings();
+      console.log('settings api:', response);
+      if (response) {
+        yield put(
+          onSettings.success({settings: response, expiry: now + 10000}),
+        );
+      }
     } else {
-      Alert.alert('Error', 'Can\'t get settings');
+      console.log('settings:', 'cache');
     }
   } catch (ex) {
     const error = ex as AxiosError;

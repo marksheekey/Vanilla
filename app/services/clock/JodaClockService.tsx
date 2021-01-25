@@ -1,13 +1,17 @@
 import {IClockService} from './IClockService';
-import {LocalDate} from '@js-joda/core';
+import {LocalDate} from 'js-joda';
 
-const full_date = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const full_date = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
 export default class JodaClockService implements IClockService {
   private static instance: JodaClockService;
 
-  private constructor() {
-  }
+  private constructor() {}
 
   static getInstance(): JodaClockService {
     if (!JodaClockService.instance) {
@@ -19,7 +23,11 @@ export default class JodaClockService implements IClockService {
 
   apiDateToMillis(date: string): number {
     let jDate = LocalDate.parse(date);
-    let hDate = new Date(jDate.year(), jDate.month().ordinal(), jDate.dayOfMonth());
+    let hDate = new Date(
+      jDate.year(),
+      jDate.month().ordinal(),
+      jDate.dayOfMonth(),
+    );
     return hDate.getTime() / 1000;
   }
 
@@ -30,7 +38,9 @@ export default class JodaClockService implements IClockService {
 
   apiDateToPrettyDate(apiDate: string): string {
     let utc = LocalDate.parse(apiDate);
-    let date = new Date(Date.UTC(utc.year(), utc.month().ordinal(), utc.dayOfMonth()));
+    let date = new Date(
+      Date.UTC(utc.year(), utc.month().ordinal(), utc.dayOfMonth()),
+    );
     return new Intl.DateTimeFormat('en-GB', full_date).format(date);
   }
 
@@ -43,7 +53,6 @@ export default class JodaClockService implements IClockService {
     let utc = LocalDate.parse(date).minusMonths(1);
     return this.toAPIFormat(utc);
   }
-
 
   toAPIFormat(date: LocalDate): string {
     let month = date.month().value().toString();
@@ -60,5 +69,4 @@ export default class JodaClockService implements IClockService {
   now(): number {
     return Date.now();
   }
-
 }
