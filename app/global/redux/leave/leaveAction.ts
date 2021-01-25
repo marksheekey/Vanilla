@@ -1,22 +1,22 @@
 import {ActionType, createAction, createAsyncAction} from 'typesafe-actions';
 import {LeaveState} from './leaveReducer'
 
-export const onFetchLeave = createAsyncAction(
+export const onFetchLeaveThisMonth = createAsyncAction(
   'leave/ON_LEAVE_REQUEST',
   'leave/ON_LEAVE_SUCCESS',
   'leave/ON_LEAVE_FAILURE',
 )<void, LeaveState, Error>()
 
-export const onThisMonth = createAction(
-  'leave/ON_THIS_MONTH_REQUEST',
-)
+export const onNextMonth = createAsyncAction(
+  'leave/ON_LEAVE_REQUEST_NEXT_MONTH',
+  'leave/ON_LEAVE_SUCCESS_NEXT_MONTH',
+  'leave/ON_LEAVE_FAILURE_NEXT_MONTH',
+)<void, LeaveState, Error>()
 
-export const onNextMonth = createAction(
-  'leave/ON_NEXT_MONTH_REQUEST',
-)
+export const onPrevMonth = createAsyncAction(
+  'leave/ON_LEAVE_REQUEST_PREV_MONTH',
+  'leave/ON_LEAVE_SUCCESS_PREV_MONTH',
+  'leave/ON_LEAVE_FAILURE_PREV_MONTH',
+)<void, LeaveState, Error>()
 
-export const onPrevMonth = createAction(
-  'leave/ON_PREV_MONTH_REQUEST',
-)
-
-export type LeaveActions = ActionType<typeof onFetchLeave> | ActionType<typeof onNextMonth> | ActionType<typeof onPrevMonth> | ActionType<typeof onThisMonth>
+export type LeaveActions = ActionType<typeof onFetchLeaveThisMonth> | ActionType<typeof onNextMonth> | ActionType<typeof onPrevMonth>
