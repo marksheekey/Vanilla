@@ -32,8 +32,13 @@ export default class JodaClockService implements IClockService {
   }
 
   finalAPIDateOfMonth(date: string): string {
-    let utc = LocalDate.parse(date).plusMonths(1);
+    let utc = LocalDate.parse(date).withDayOfMonth(1).plusMonths(1)
     return this.toAPIFormat(utc.minusDays(1));
+  }
+
+  startAPIDateOfMonth(date: string): string {
+    let utc = LocalDate.parse(date).withDayOfMonth(1)
+    return this.toAPIFormat(utc);
   }
 
   apiDateToPrettyDate(apiDate: string): string {
@@ -52,6 +57,11 @@ export default class JodaClockService implements IClockService {
   subMonthFromAPIDate(date: string): string {
     let utc = LocalDate.parse(date).minusMonths(1);
     return this.toAPIFormat(utc);
+  }
+
+  toStartOfThisMonth(){
+    let today = this.toAPIFormat(LocalDate.now());
+    return this.startAPIDateOfMonth(today);
   }
 
   toAPIFormat(date: LocalDate): string {
