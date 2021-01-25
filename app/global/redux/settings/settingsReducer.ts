@@ -19,5 +19,6 @@ const settingsReducer = createReducer<
 >(defaultState).handleAction(onSettings.request, (state) => ({
   settings: state.settings,
   expiry: state.expiry,
-}));
+}))
+  .handleAction(onSettings.success, (state, action) => ({settings:action.payload.settings, expiry:action.payload.expiry}))
 export default settingsReducer;
