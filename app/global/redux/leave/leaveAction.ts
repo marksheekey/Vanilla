@@ -7,8 +7,8 @@ export const onFetchLeaveForMonth = createAsyncAction(
   'leave/ON_LEAVE_FAILURE',
 )<void, LeaveState, Error>()
 
-export const onNextMonth = createAction('leave/ON_LEAVE_REQUEST_NEXT_MONTH')
+export const onNextMonth = createAction('leave/ON_LEAVE_REQUEST_NEXT_MONTH')<void>()
 
-export const onPrevMonth = createAction('leave/ON_LEAVE_REQUEST_PREV_MONTH')
+export const onPrevMonth = createAction('leave/ON_LEAVE_REQUEST_PREV_MONTH')<void>()
 
 export type LeaveActions = ActionType<typeof onFetchLeaveForMonth> | ActionType<typeof onPrevMonth> |  ActionType<typeof onNextMonth>
