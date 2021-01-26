@@ -7,7 +7,6 @@ import {Leave} from '../../../services/api/classes/Leave'
 import {LeaveActions, onFetchLeaveForMonth, onNextMonth, onPrevMonth} from '../leave/leaveAction'
 import {LeaveSelector} from '../leave/leaveSelector'
 
-
 const api = LeaveAPI.getInstance();
 const clock = JodaClockService.getInstance();
 

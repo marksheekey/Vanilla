@@ -13,7 +13,6 @@ export default class LeaveAPI extends AxiosClient implements ILeave {
     if (!LeaveAPI.instance) {
       LeaveAPI.instance = new LeaveAPI();
     }
-
     return LeaveAPI.instance;
   }
 
