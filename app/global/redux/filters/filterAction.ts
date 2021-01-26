@@ -1,4 +1,4 @@
-import {ActionType, createAction, createAsyncAction} from 'typesafe-actions';
+import {ActionType, createAction} from 'typesafe-actions';
 
 export const onShowAvailabilityChange = createAction('filter/ON_AVAILAIBILITY_CHANGE')<boolean>()
 export const onShowBreakChange = createAction('filter/ON_SHOW_BREAK_CHANGE')<boolean>()

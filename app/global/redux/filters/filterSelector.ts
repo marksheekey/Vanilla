@@ -1,14 +1,9 @@
 import {Selector} from 'reselect';
-import {Maybe} from '../../../types/interface';
-import {Leave} from '../../../services/api/classes/Leave'
 import {RootState} from '../types'
+import {FilterState} from './filterReducer'
 
-// @ts-ignore
-const getFilters: Selector<RootState, Maybe<Leave[]>> = (state: RootState) => state.leaveReducer.leave
-
-const getLeaveStartDate: Selector<RootState, Maybe<string>> = (state: RootState) =>
-  state.leaveReducer.startDate
+const getFilters: Selector<RootState, FilterState> = (state: RootState) => state.filterReducer
 
 export const FilterSelector = {
-  getLeave,getLeaveStartDate
+  getFilters
 };

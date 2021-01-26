@@ -1,19 +1,22 @@
-import {takeLatest} from 'redux-saga/effects'
+import {put, select, takeLatest} from 'redux-saga/effects'
 import {
   onLocationChange,
   onShowAvailabilityChange,
   onShowAvatarChange,
   onShowBreakChange, onShowEmptyDaysChange
 } from '../filters/filterAction'
+import {FilterSelector} from '../filters/filterSelector'
 
-function* locationChange(){
 
+function* filterChange(){
+  const current = yield select(FilterSelector.getFilters)
+  console.log("filters:",current)
 }
 
-export function* filterSaga() {
-  yield takeLatest([onLocationChange], locationChange);
-  yield takeLatest([onShowAvailabilityChange], locationChange);
-  yield takeLatest([onShowBreakChange], locationChange);
-  yield takeLatest([onShowAvatarChange], locationChange);
-  yield takeLatest([onShowEmptyDaysChange], locationChange);
+export function* filterRotasSaga() {
+  yield takeLatest([onLocationChange], filterChange);
+  yield takeLatest([onShowAvailabilityChange], filterChange);
+  yield takeLatest([onShowBreakChange], filterChange);
+  yield takeLatest([onShowAvatarChange], filterChange);
+  yield takeLatest([onShowEmptyDaysChange], filterChange);
 }

@@ -1,10 +1,9 @@
 import {SagaMiddleware} from 'redux-saga';
 import {all} from 'redux-saga/effects';
-import {settingsSaga} from './sagas';
-import {leaveSaga} from './sagas/leave.sagas'
+import {filterSaga, leaveSaga, settingsSaga} from './sagas';
 
 function* rootSaga() {
-  yield all([settingsSaga(), leaveSaga()]);
+  yield all([settingsSaga(), leaveSaga(), filterSaga()]);
 }
 
 export const registerSagas = (sagaMiddleware: SagaMiddleware) => {
