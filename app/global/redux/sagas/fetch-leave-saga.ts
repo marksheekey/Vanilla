@@ -37,5 +37,6 @@ function* fetchMonth(action: LeaveActions) {
 }
 
 export function* fetchLeaveSaga() {
-  yield takeLatest([onFetchLeaveForMonth.request, onNextMonth.request,onPrevMonth.request], fetchMonth);
+  yield takeLatest([onFetchLeaveForMonth.request,onPrevMonth.request], fetchMonth);
+  yield takeLatest(onNextMonth,fetchMonth)
 }

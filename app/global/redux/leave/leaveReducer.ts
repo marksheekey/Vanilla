@@ -20,5 +20,9 @@ const leaveReducer = createReducer<
   leave: state.leave,
   startDate: state.startDate
 }))
+  .handleAction(onNextMonth, (state) => ({
+  leave: state.leave,
+  startDate: state.startDate
+}))
   .handleAction(onFetchLeaveForMonth.success, (state, action) => ({leave:action.payload.leave, startDate:action.payload.startDate}))
 export default leaveReducer;
