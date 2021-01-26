@@ -25,7 +25,7 @@ function* fetchMonth(action: LeaveActions) {
   try {
     let response: Maybe<Leave[]> = yield api.getLeave(start, end);
     if (response) {
-      console.log('leave: response', response);
+      console.log('****leave:***** response', response);
       yield put(
         onFetchLeaveForMonth.success({ leave: response, startDate: start })
       );
