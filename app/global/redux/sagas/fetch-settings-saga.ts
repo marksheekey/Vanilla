@@ -14,17 +14,12 @@ const clock = JodaClockService.getInstance();
 function* fetchSettings() {
   try {
     let now = clock.now();
-    console.log('settings:', 'now '+now);
     const existingExpiry: number = yield select(
       SettingsSelector.getExpiryValue,
     );
-    console.log('settings:', 'expiry '+existingExpiry);
     if (now > existingExpiry) {
-      console.log('settings:', 'fetch settings');
       let response: Maybe<RotaSettings> = yield api.getSettings();
-      console.log('settings api:', response);
       if (response) {
-        console.log('settings:', 'update settings');
         yield put(
           onSettings.success({settings: response, expiry: now + 10000}),
         );

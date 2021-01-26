@@ -2,6 +2,7 @@ import {createReducer} from 'typesafe-actions';
 import {LeaveActions, onFetchLeaveThisMonth, onNextMonth, onPrevMonth} from './leaveAction';
 import {DeepReadonly, Maybe} from '../../../types/interface';
 import {Leave} from '../../../services/api/classes/Leave'
+import {onSettings} from '../settings/settingsAction'
 
 export interface LeaveState {
   leave: Maybe<Leave[]>;
@@ -28,4 +29,5 @@ const leaveReducer = createReducer<
     leave: state.leave,
     startDate: state.startDate
   }))
+  .handleAction(onFetchLeaveThisMonth.success, (state, action) => ({leave:action.payload.leave, startDate:action.payload.startDate}))
 export default leaveReducer;
