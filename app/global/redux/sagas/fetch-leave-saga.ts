@@ -10,21 +10,11 @@ import {LeaveSelector} from '../leave/leaveSelector'
 const api = LeaveAPI.getInstance();
 const clock = JodaClockService.getInstance();
 
-function* fetchMonth(action: LeaveActions) {
-  let start = clock.toStartOfThisMonth()
-  if(action.type == 'leave/ON_LEAVE_REQUEST_NEXT_MONTH'){
-    const current = yield select(LeaveSelector.getLeaveStartDate);
-    start = clock.addMonthToAPIDate(current);
-  }
-  if(action.type == 'leave/ON_LEAVE_REQUEST_PREV_MONTH'){
-    const current = yield select(LeaveSelector.getLeaveStartDate);
-    start = clock.subMonthFromAPIDate(current);
-  }
+function* fetchMonth(start: string) {
   let end = clock.finalAPIDateOfMonth(start);
   try {
     let response: Maybe<Leave[]> = yield api.getLeave(start, end);
     if (response) {
-      console.log('****leave:***** response', response);
       yield put(
         onFetchLeaveForMonth.success({ leave: response, startDate: start })
       );
@@ -35,6 +25,25 @@ function* fetchMonth(action: LeaveActions) {
   }
 }
 
+function* getThisMonth(){
+  let start = clock.toStartOfThisMonth()
+  yield fetchMonth(start)
+}
+
+function* getNextMonth(){
+  const current = yield select(LeaveSelector.getLeaveStartDate);
+  let start = clock.addMonthToAPIDate(current);
+  yield fetchMonth(start)
+}
+
+function* getPrevMonth(){
+  const current = yield select(LeaveSelector.getLeaveStartDate);
+  let start = clock.subMonthFromAPIDate(current);
+  yield fetchMonth(start)
+}
+
 export function* fetchLeaveSaga() {
-  yield takeLatest([onFetchLeaveForMonth.request,onNextMonth, onPrevMonth], fetchMonth);
+  yield takeLatest([onFetchLeaveForMonth.request], getThisMonth);
+  yield takeLatest([onNextMonth], getNextMonth);
+  yield takeLatest([onPrevMonth], getPrevMonth);
 }
