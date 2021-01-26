@@ -1,5 +1,6 @@
 import {put, select, takeLatest} from 'redux-saga/effects'
 import {
+  onDateChange,
   onLocationChange,
   onShowAvailabilityChange,
   onShowAvatarChange,
@@ -19,4 +20,5 @@ export function* filterRotasSaga() {
   yield takeLatest([onShowBreakChange], filterChange);
   yield takeLatest([onShowAvatarChange], filterChange);
   yield takeLatest([onShowEmptyDaysChange], filterChange);
+  yield takeLatest([onDateChange], filterChange);
 }
