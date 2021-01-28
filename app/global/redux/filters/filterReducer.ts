@@ -10,7 +10,7 @@ import {
 
 export interface FilterState {
   showAvailability: boolean;
-  showBreakChange: boolean;
+  showBreaks: boolean;
   showEmptyDays: boolean;
   showAvatars: boolean;
   showLocation: number;
@@ -18,7 +18,7 @@ export interface FilterState {
 
 export const defaultState: FilterState = {
   showAvailability: true,
-  showBreakChange:true,
+  showBreaks:true,
   showEmptyDays:true,
   showAvatars:true,
   showLocation:0
@@ -30,7 +30,7 @@ const filterReducer = createReducer<DeepReadonly<FilterState>, FilterActions>(
    ...state, showAvailability: action.payload
 }))
   .handleAction(onShowBreakChange, (state, action) => ({
-    ...state, showBreak: action.payload
+    ...state, showBreaks: action.payload
   }))
   .handleAction(onShowEmptyDaysChange, (state, action) => ({
     ...state, showEmptyDays: action.payload
