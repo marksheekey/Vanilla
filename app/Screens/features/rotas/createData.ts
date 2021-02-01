@@ -22,14 +22,16 @@ export function addDataToStart(date: string){
 export interface RotaListUI{
   type: RotaDayTypes,
   key: string,
-  text: string
+  text: string,
+  date: string
 }
 
 function generateData(from: LocalDate){
   let days: RotaListUI[] = []
   for (let x = 0; x < daysToGet; x++) {
     let tt = Math.floor(Math.random() * 4)
-    let dayText = JodaClockService.getInstance().toAPIFormat(from)
+    let date = JodaClockService.getInstance().toAPIFormat(from)
+    let dayText = date
     if(tt == 0){
       dayText = dayText+" Empty Day"
     }
@@ -45,7 +47,8 @@ function generateData(from: LocalDate){
     let day: RotaListUI = {
       type: tt,
       key: "key"+x,
-      text: dayText
+      text: dayText,
+      date: date
     }
     days.push(day)
     from = from.plusDays(1)
