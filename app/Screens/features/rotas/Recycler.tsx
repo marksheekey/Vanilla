@@ -20,8 +20,8 @@ const getMore = () => {
     dataProvider: dataProvider.cloneWithRows(data)
   };
 }
+export default RecycleTestComponent: React.FC = () => {
 
-export default class RecycleTestComponent extends React.Component {
   _layoutProvider: LayoutProvider
   constructor(args: any) {
     super(args);
