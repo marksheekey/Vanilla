@@ -15,7 +15,7 @@ export function addDataToEnd(date: string){
 
 export function addDataToStart(date: string){
   let day = LocalDate.parse(date)
-  day.minusDays(daysToGet)
+  day = day.minusDays(daysToGet)
   return generateData(day)
 }
 
@@ -27,6 +27,7 @@ export interface RotaListUI{
 }
 
 function generateData(from: LocalDate){
+  console.log("generate from:", JodaClockService.getInstance().toAPIFormat(from))
   let days: RotaListUI[] = []
   for (let x = 0; x < daysToGet; x++) {
     let tt = Math.floor(Math.random() * 4)
